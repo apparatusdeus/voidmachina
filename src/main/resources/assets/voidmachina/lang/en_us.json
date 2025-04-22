@@ -1,0 +1,13 @@
+{
+  "creative_tab.void_machina": "Void Machina",
+  "item.voidmachina.void_crystal": "Void Crystal",
+  "item.voidmachina.cracked_void_crystal": "Cracked Void Crystak",
+  "item.voidmachina.raw_void_steel": "Raw Void Steel",
+  "item.voidmachina.void_steel_ingot": "Void Steel Ingot",
+  "item.voidmachina.void_steel_nugget": "Void Steel Nugget",
+  "item.voidmachina.void_steel_plate": "Void Steel Plate",
+  "block.voidmachina.raw_void_steel_block": "Raw Void Steel Block",
+  "block.voidmachina.void_steel_block": "Void Steel Block",
+  "block.voidmachina.void_steel_ore": "Void Steel Ore",
+  "block.voidmachina.void_node": "Void Node"
+}

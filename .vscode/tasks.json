@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gradle",
+			"id": "/opt/projects/personal/voidmachinarunClientvoidmachina",
+			"script": "runClient",
+			"description": "",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"project": "voidmachina",
+			"buildFile": "/opt/projects/personal/voidmachina/build.gradle",
+			"rootProject": "voidmachina",
+			"projectFolder": "/opt/projects/personal/voidmachina",
+			"workspaceFolder": "/opt/projects/personal/voidmachina",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: runClient"
+		}
+	]
+}
