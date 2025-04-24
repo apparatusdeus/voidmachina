@@ -37,8 +37,8 @@ public class VoidMachina {
         NeoForge.EVENT_BUS.register(this);
 
         BlockRegistry.register(modEventBus);
-        CreativeTabRegistry.register(modEventBus);
         ItemRegistry.register(modEventBus);
+        CreativeTabRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
