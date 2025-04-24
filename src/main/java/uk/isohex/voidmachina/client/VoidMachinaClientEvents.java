@@ -3,14 +3,14 @@ package uk.isohex.voidmachina.client;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import uk.isohex.voidmachina.VoidMachina;
 import uk.isohex.voidmachina.api.energy.VoidEnergyRegistry;
 
-@Mod.EventBusSubscriber(modid = VoidMachina.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = VoidMachina.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
 public class VoidMachinaClientEvents {
 
   @SubscribeEvent

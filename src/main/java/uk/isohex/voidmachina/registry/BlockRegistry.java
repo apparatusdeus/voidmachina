@@ -1,66 +1,71 @@
 package uk.isohex.voidmachina.registry;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import uk.isohex.voidmachina.VoidMachina;
 
 public class BlockRegistry {
-  public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-      VoidMachina.MODID);
+  public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(VoidMachina.MODID);
 
-  public static final RegistryObject<Block> VOID_NODE = registerBlock(
+  public static final DeferredBlock<Block> VOID_NODE = registerBlock(
       "void_node",
-      () -> new Block(BlockBehaviour.Properties.of()));
+      registryName -> new Block(
+          BlockBehaviour.Properties.of()
+              .setId(ResourceKey.create(Registries.BLOCK, registryName))));
 
-  public static final RegistryObject<Block> VOID_STEEL_ORE = registerBlock("void_steel_ore",
-      () -> new Block(BlockBehaviour.Properties.of()
+  public static final DeferredBlock<Block> VOID_STEEL_ORE = registerBlock(
+      "void_steel_ore",
+      registryName -> new Block(BlockBehaviour.Properties.of()
+          .setId(ResourceKey.create(Registries.BLOCK, registryName))
           .mapColor(MapColor.STONE)
           .strength(3.5f)
           .requiresCorrectToolForDrops()
           .destroyTime(3.0f) // Higher value means harder to break
           .explosionResistance(3.0f)
           .instrument(NoteBlockInstrument.BASEDRUM) // Optional: for noteblock sound
-          .sound(SoundType.STONE))); // Optional: for block sounds
+          .sound(SoundType.STONE)));
 
-  public static final RegistryObject<Block> RAW_VOID_STEEL_BLOCK = registerBlock("raw_void_steel_block",
-      () -> new Block(BlockBehaviour.Properties.of()
+  public static final DeferredBlock<Block> RAW_VOID_STEEL_BLOCK = registerBlock(
+      "raw_void_steel_block",
+      registryName -> new Block(BlockBehaviour.Properties.of()
+          .setId(ResourceKey.create(Registries.BLOCK, registryName))
           .mapColor(MapColor.STONE)
           .strength(3.5f)
           .requiresCorrectToolForDrops()
           .destroyTime(3.0f) // Higher value means harder to break
           .explosionResistance(3.0f)
           .instrument(NoteBlockInstrument.BASEDRUM) // Optional: for noteblock sound
-          .sound(SoundType.STONE))); // Optional: for block sounds
+          .sound(SoundType.STONE)));
 
-  public static final RegistryObject<Block> VOID_STEEL_BLOCK = registerBlock("void_steel_block",
-      () -> new Block(BlockBehaviour.Properties.of()
+  public static final DeferredBlock<Block> VOID_STEEL_BLOCK = registerBlock(
+      "void_steel_block",
+      registryName -> new Block(BlockBehaviour.Properties.of()
+          .setId(ResourceKey.create(Registries.BLOCK, registryName))
           .mapColor(MapColor.METAL)
           .strength(5.0f)
           .requiresCorrectToolForDrops()
           .destroyTime(5.0f) // Higher value means harder to break
           .explosionResistance(5.0f)
           .instrument(NoteBlockInstrument.BASEDRUM) // Optional: for noteblock sound
-          .sound(SoundType.METAL))); // Optional: for block sounds
+          .sound(SoundType.METAL)));
 
-  // public static final RegistryObject<Block> VOID_ENERGY_EXTRACTOR =
-  // BLOCKS.register(
-  // "void_energy_extractor",
-  // () -> new Block(
-  // BlockBehaviour.Properties.of(Material.METAL).strength(3.5f).requiresCorrectToolForDrops()));
-
-  public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> blockSupplier) {
-    RegistryObject<T> block = BLOCKS.register(name, blockSupplier);
-    ItemRegistry.registerBlockItem(name, block);
-    return block;
+  public static <B extends Block> DeferredBlock<B> registerBlock(String name,
+      Function<ResourceLocation, ? extends B> func) {
+    DeferredBlock<B> blockDeferred = BLOCKS.register(name, func);
+    ItemRegistry.registerBlockItem(name, blockDeferred);
+    return blockDeferred;
   }
 
   public static final void register(IEventBus eventBus) {

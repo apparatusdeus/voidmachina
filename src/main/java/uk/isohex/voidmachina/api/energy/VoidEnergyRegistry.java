@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class VoidEnergyRegistry {
   private static final Map<ResourceLocation, Integer> itemVoidEnergyValues = new HashMap<>();
@@ -15,16 +13,17 @@ public class VoidEnergyRegistry {
 
   // Query VE value for a given stack
   public static int getVoidEnergy(ItemStack stack) {
-    Item item = stack.getItem();
-    ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(item);
+    // Item item = stack.getItem();
+    // int itemId = Item.getId(item);
 
-    if (itemId == null)
-      return DEFAULT_VE_VALUE;
+    // if (itemId == null) {
+    // return DEFAULT_VE_VALUE;
+    // }
 
-    // Check item-specific override
-    if (itemVoidEnergyValues.containsKey(itemId)) {
-      return itemVoidEnergyValues.get(itemId);
-    }
+    // // Check item-specific override
+    // if (itemVoidEnergyValues.containsKey(itemId)) {
+    // return itemVoidEnergyValues.get(itemId);
+    // }
 
     // Future: Check tags here (for now we ignore them)
     return DEFAULT_VE_VALUE;
