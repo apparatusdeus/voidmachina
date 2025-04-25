@@ -7,6 +7,6 @@
     "item": "voidmachina:raw_void_steel"
   },
   "result": {
-    "item": "voidmachina:void_steel_ingot"
+    "id": "voidmachina:void_steel_ingot"
   }
 }

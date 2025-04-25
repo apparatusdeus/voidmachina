@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "#": {
       "item": "voidmachina:raw_void_steel"
     }
   },
   "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
+    "###",
+    "###",
+    "###"
   ],
   "result": {
     "count": 1,
-    "item": "voidmachina:raw_void_steel_block"
+    "id": "voidmachina:raw_void_steel_block"
   }
 }

@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "#": {
       "item": "voidmachina:cracked_void_crystal"
     }
   },
   "pattern": [
-    " A ",
-    "AAA",
-    " A "
+    " # ",
+    "###",
+    " # "
   ],
   "result": {
     "count": 1,
-    "item": "voidmachina:void_crystal"
+    "id": "voidmachina:void_crystal"
   }
 }
