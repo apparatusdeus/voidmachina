@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:blasting",
   "ingredient": {
     "item": "voidmachina:raw_void_steel"
   },
@@ -7,5 +7,5 @@
     "id": "voidmachina:void_steel_ingot"
   },
   "experience": 0.7,
-  "cookingtime": 200
+  "cookingtime": 100
 }
