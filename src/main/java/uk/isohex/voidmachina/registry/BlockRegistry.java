@@ -10,14 +10,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import uk.isohex.voidmachina.VoidMachina;
+import uk.isohex.voidmachina.core.Common;
 
 public class BlockRegistry {
-        public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(VoidMachina.MODID);
+        public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Common.MODID);
 
         public static final DeferredBlock<Block> VOID_NODE = registerBlock(
                         "void_node",
-                        () -> new Block(BlockBehaviour.Properties.of()));
+                        () -> new Block(BlockBehaviour.Properties.of().noLootTable()));
 
         public static final DeferredBlock<Block> VOID_STEEL_ORE = registerBlock(
                         "void_steel_ore",

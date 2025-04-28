@@ -6,10 +6,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import uk.isohex.voidmachina.VoidMachina;
+import uk.isohex.voidmachina.core.Common;
 
 public class ItemRegistry {
-  public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(VoidMachina.MODID);
+  public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Common.MODID);
 
   public static final DeferredItem<Item> VOID_CRYSTAL = ITEMS.registerSimpleItem("void_crystal");
 

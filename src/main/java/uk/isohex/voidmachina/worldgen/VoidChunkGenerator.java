@@ -1,56 +1,109 @@
-// package com.voidmachina.worldgen;
+package uk.isohex.voidmachina.worldgen;
 
-// import net.minecraft.core.Holder;
-// import net.minecraft.core.RegistryAccess;
-// import net.minecraft.core.registries.Registries;
-// import net.minecraft.resources.ResourceLocation;
-// import net.minecraft.server.level.WorldGenRegion;
-// import net.minecraft.world.level.StructureManager;
-// import net.minecraft.world.level.biome.BiomeManager;
-// import net.minecraft.world.level.biome.BiomeSource;
-// import net.minecraft.world.level.chunk.*;
-// import net.minecraft.world.level.levelgen.*;
-// import net.minecraft.world.level.levelgen.structure.StructureSet;
-// import
-// net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-// public class VoidChunkGenerator extends ChunkGenerator {
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.blending.Blender;
+import uk.isohex.voidmachina.registry.BiomeRegistry;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.server.level.WorldGenRegion;
 
-// public VEVoidChunkGenerator(Holder<StructureSet> structureSet, BiomeSource
-// biomeSource) {
-// super(structureSet, biomeSource);
-// }
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-// @Override
-// public void buildSurface(WorldGenRegion region, StructureManager
-// structureManager, RandomState randomState,
-// ChunkAccess chunk) {
-// // Intentionally left blank to create a void world
-// }
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryOps;
 
-// @Override
-// public void applyCarvers(WorldGenRegion region, long seed, RandomState
-// randomState, BiomeManager biomeManager,
-// StructureManager structureManager, ChunkAccess chunk, GenerationStep.Carving
-// step) {
-// // No carvers applied in a void world
-// }
+public class VoidChunkGenerator extends ChunkGenerator {
 
-// @Override
-// public void fillFromNoise(WorldGenRegion region, StructureManager
-// structureManager, RandomState randomState,
-// ChunkAccess chunk) {
-// // No terrain noise to fill in a void world
-// }
+  public static final MapCodec<VoidChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(builder -> builder
+      .group(RegistryOps.retrieveElement(BiomeRegistry.VOID_BIOME_ID))
+      .apply(builder, builder.stable(VoidChunkGenerator::new)));
 
-// @Override
-// public int getBaseHeight(int x, int z, Heightmap.Types heightmapType,
-// LevelHeightAccessor level) {
-// return level.getMinBuildHeight();
-// }
+  protected static final BlockState AIR;
+  protected static final BlockState BARRIER;
+  public static final int HEIGHT = 70;
+  public static final int BARRIER_HEIGHT = 60;
 
-// @Override
-// public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor level) {
-// return new NoiseColumn(level.getMinBuildHeight(), new BlockState[0]);
-// }
-// }
+  public VoidChunkGenerator(Holder.Reference<Biome> biome) {
+    super(new VoidBiomeSource(biome));
+  }
+
+  @Override
+  protected MapCodec<? extends ChunkGenerator> codec() {
+    return CODEC;
+  }
+
+  @Override
+  public void buildSurface(@Nonnull WorldGenRegion region, @Nonnull StructureManager structureManager,
+      @Nonnull RandomState random, @Nonnull ChunkAccess chunk) {
+  }
+
+  @Override
+  public void applyBiomeDecoration(@Nonnull WorldGenLevel level, @Nonnull ChunkAccess chunk,
+      @Nonnull StructureManager structureManager) {
+  }
+
+  @Override
+  public CompletableFuture<ChunkAccess> fillFromNoise(@Nonnull Blender blender, @Nonnull RandomState random,
+      @Nonnull StructureManager structureManager, @Nonnull ChunkAccess chunk) {
+    return CompletableFuture.completedFuture(chunk);
+  }
+
+  @Override
+  public int getBaseHeight(int x, int z, @Nonnull Heightmap.Types heightmapType, @Nonnull LevelHeightAccessor level,
+      @Nonnull RandomState random) {
+    return 0;
+  }
+
+  @Override
+  public NoiseColumn getBaseColumn(int x, int z, @Nonnull LevelHeightAccessor level, @Nonnull RandomState random) {
+    return new NoiseColumn(0, new BlockState[0]);
+  }
+
+  @Override
+  public void addDebugScreenInfo(@Nonnull List<String> info, @Nonnull RandomState random, @Nonnull BlockPos pos) {
+  }
+
+  @Override
+  public void applyCarvers(@Nonnull WorldGenRegion region, long seed, @Nonnull RandomState random,
+      @Nonnull BiomeManager biomeManager,
+      @Nonnull StructureManager structureManager, @Nonnull ChunkAccess chunk, @Nonnull GenerationStep.Carving step) {
+  }
+
+  @Override
+  public void spawnOriginalMobs(@Nonnull WorldGenRegion level) {
+  }
+
+  @Override
+  public int getMinY() {
+    return -64;
+  }
+
+  @Override
+  public int getGenDepth() {
+    return 384;
+  }
+
+  @Override
+  public int getSeaLevel() {
+    return 64;
+  }
+
+  static {
+    AIR = Blocks.AIR.defaultBlockState();
+    BARRIER = Blocks.BARRIER.defaultBlockState();
+  }
+}

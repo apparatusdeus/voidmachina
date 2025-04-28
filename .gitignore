@@ -26,3 +26,5 @@ run-data
 repo
 
 .DS_Store
+
+generated/

@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class VoidEnergyRegistry {
+
   private static final Map<ResourceLocation, Integer> itemVoidEnergyValues = new HashMap<>();
   private static final Map<ResourceLocation, Integer> tagVoidEnergyValues = new HashMap<>();
   private static final int DEFAULT_VE_VALUE = 0;
@@ -43,4 +44,5 @@ public class VoidEnergyRegistry {
     itemVoidEnergyValues.clear();
     tagVoidEnergyValues.clear();
   }
+
 }

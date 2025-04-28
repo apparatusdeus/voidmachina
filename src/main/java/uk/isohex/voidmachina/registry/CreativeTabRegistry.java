@@ -7,16 +7,16 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import uk.isohex.voidmachina.VoidMachina;
+import uk.isohex.voidmachina.core.Common;
 
 public class CreativeTabRegistry {
   public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister
-      .create(Registries.CREATIVE_MODE_TAB, VoidMachina.MODID);
+      .create(Registries.CREATIVE_MODE_TAB, Common.MODID);
 
   public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VOID_MACHINA_TAB = TABS.register(
       "void_machina",
       () -> CreativeModeTab.builder()
-          .title(Component.translatable("creative_tab.void_machina"))
+          .title(Component.translatable("creative_tab.voidmachina"))
           .icon(() -> new ItemStack(ItemRegistry.VOID_CRYSTAL.get()))
           .displayItems((parameters, output) -> {
             output.accept(ItemRegistry.VOID_CRYSTAL.get());
