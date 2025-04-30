@@ -1,7 +1,7 @@
 {
   "dimensions": {
     "minecraft:overworld": {
-      "type": "minecraft:overworld",
+      "type": "voidmachina:void_dimension_type",
       "generator": {
         "type": "voidmachina:void_chunk_generator",
         "settings": {}

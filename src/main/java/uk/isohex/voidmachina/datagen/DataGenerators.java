@@ -25,51 +25,57 @@ import uk.isohex.voidmachina.core.Common;
 @EventBusSubscriber(modid = Common.MODID, bus = Bus.MOD)
 public class DataGenerators {
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+  @SubscribeEvent
+  public static void gatherData(GatherDataEvent event) {
+    DataGenerator generator = event.getGenerator();
+    PackOutput packOutput = generator.getPackOutput();
+    ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+    CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        SubProviderEntry subProviderEntry = new LootTableProvider.SubProviderEntry(
-                ModBlockLootTableProvider::new,
-                LootContextParamSets.BLOCK);
+    SubProviderEntry subProviderEntry = new LootTableProvider.SubProviderEntry(
+        ModBlockLootTableProvider::new,
+        LootContextParamSets.BLOCK);
 
-        generator.addProvider(
-                event.includeServer(),
-                new LootTableProvider(packOutput, Collections.emptySet(), List.of(subProviderEntry), lookupProvider));
+    generator.addProvider(
+        event.includeServer(),
+        new LootTableProvider(packOutput, Collections.emptySet(), List.of(subProviderEntry),
+            lookupProvider));
 
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
+    generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
 
-        BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(packOutput, lookupProvider,
-                existingFileHelper);
+    BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(packOutput, lookupProvider,
+        existingFileHelper);
 
-        generator.addProvider(
-                event.includeServer(),
-                blockTagsProvider);
+    generator.addProvider(
+        event.includeServer(),
+        blockTagsProvider);
 
-        generator.addProvider(
-                event.includeServer(),
-                new ModItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(),
-                        existingFileHelper));
+    generator.addProvider(
+        event.includeServer(),
+        new ModItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(),
+            existingFileHelper));
 
-        generator.addProvider(
-                event.includeClient(),
-                new ModItemModelProvider(packOutput, existingFileHelper));
+    generator.addProvider(
+        event.includeClient(),
+        new ModItemModelProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(
-                event.includeClient(),
-                new ModBlockStateProvider(packOutput, existingFileHelper));
+    generator.addProvider(
+        event.includeClient(),
+        new ModBlockStateProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(
-                event.includeServer(),
-                new ModWorldPresetTagsProvider(packOutput, lookupProvider, existingFileHelper));
+    generator.addProvider(
+        event.includeServer(),
+        new ModWorldPresetTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
-        RegistrySetBuilder builder = new RegistrySetBuilder().add(Registries.BIOME, ModBiomeProvider::bootstrap);
+    RegistrySetBuilder builder = new RegistrySetBuilder()
+        .add(Registries.BIOME, ModBiomeProvider::bootstrap)
+        .add(Registries.DIMENSION_TYPE, ModDimensionTypeProvider::bootstrap)
+        .add(Registries.LEVEL_STEM, ModDimensionProvider::bootstrap)
+        .add(Registries.WORLD_PRESET, ModWorldPresetProvider::bootstrap);
 
-        generator.addProvider(
-                event.includeServer(),
-                new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, Set.of(Common.MODID)));
-    }
+    generator.addProvider(
+        event.includeServer(),
+        new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder,
+            Set.of(Common.MODID)));
+  }
 }

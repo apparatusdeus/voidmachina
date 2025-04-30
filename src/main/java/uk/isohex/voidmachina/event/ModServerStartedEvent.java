@@ -8,6 +8,7 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import uk.isohex.voidmachina.core.Common;
 import uk.isohex.voidmachina.worldgen.SpawnPlacementSavedData;
 import uk.isohex.voidmachina.worldgen.SpawnStructurePlacer;
+import uk.isohex.voidmachina.worldgen.VoidChunkGenerator;
 
 @EventBusSubscriber(modid = Common.MODID, bus = Bus.GAME)
 public class ModServerStartedEvent {
@@ -19,13 +20,16 @@ public class ModServerStartedEvent {
     if (overworld == null)
       return;
 
+    if (!(overworld.getChunkSource().getGenerator() instanceof VoidChunkGenerator)) {
+      return;
+    }
+
     var spawnData = SpawnPlacementSavedData.get(overworld);
 
-    // if (!spawnData.isPlaced()) {
-    Common.LOGGER.info("Placing spawn structure...");
-    SpawnStructurePlacer.placeSpawnStructure(overworld);
-    spawnData.markPlaced();
-    spawnData.setDirty();
-    // }
+    if (!spawnData.isPlaced()) {
+      Common.LOGGER.info("Placing spawn structure...");
+      SpawnStructurePlacer.placeSpawnStructure(overworld);
+      spawnData.markPlaced();
+    }
   }
 }

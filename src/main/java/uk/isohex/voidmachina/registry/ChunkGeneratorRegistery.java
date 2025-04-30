@@ -14,7 +14,7 @@ public class ChunkGeneratorRegistery {
   public static final DeferredRegister<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATORS = DeferredRegister
       .create(Registries.CHUNK_GENERATOR, Common.MODID);
 
-  public static final DeferredHolder<MapCodec<? extends ChunkGenerator>, MapCodec<VoidChunkGenerator>> VOID_CHUNK_GENERATOR = CHUNK_GENERATORS
+  public static final DeferredHolder<MapCodec<? extends ChunkGenerator>, MapCodec<VoidChunkGenerator>> VOID = CHUNK_GENERATORS
       .register("void_chunk_generator", () -> VoidChunkGenerator.CODEC);
 
   public static final void register(IEventBus eventBus) {

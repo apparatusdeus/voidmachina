@@ -47,7 +47,7 @@ public class SpawnStructurePlacer {
       Common.LOGGER.info("Successfully placed structure!");
     }
 
-    BlockPos spawnPos = structurePos.offset(size.getX() / 2, size.getY() / 2, 2);
+    BlockPos spawnPos = structurePos.offset(size.getX() / 2, size.getY() / 2, 1);
     Common.LOGGER.info("Spawn position {}", spawnPos);
     level.setDefaultSpawnPos(spawnPos, 0.0F);
     level.getGameRules().getRule(GameRules.RULE_SPAWN_RADIUS).set(0, level.getServer());

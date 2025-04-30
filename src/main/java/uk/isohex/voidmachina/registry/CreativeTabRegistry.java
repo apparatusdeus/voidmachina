@@ -13,8 +13,8 @@ public class CreativeTabRegistry {
   public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister
       .create(Registries.CREATIVE_MODE_TAB, Common.MODID);
 
-  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VOID_MACHINA_TAB = TABS.register(
-      "void_machina",
+  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VOID = TABS.register(
+      Common.MODID,
       () -> CreativeModeTab.builder()
           .title(Component.translatable("creative_tab.voidmachina"))
           .icon(() -> new ItemStack(ItemRegistry.VOID_CRYSTAL.get()))

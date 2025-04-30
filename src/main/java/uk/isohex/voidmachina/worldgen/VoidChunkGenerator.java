@@ -29,7 +29,7 @@ import net.minecraft.resources.RegistryOps;
 public class VoidChunkGenerator extends ChunkGenerator {
 
   public static final MapCodec<VoidChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(builder -> builder
-      .group(RegistryOps.retrieveElement(BiomeRegistry.VOID_BIOME_ID))
+      .group(RegistryOps.retrieveElement(BiomeRegistry.VOID))
       .apply(builder, builder.stable(VoidChunkGenerator::new)));
 
   protected static final BlockState AIR;

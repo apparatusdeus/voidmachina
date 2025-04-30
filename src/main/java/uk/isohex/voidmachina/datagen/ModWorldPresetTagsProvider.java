@@ -13,7 +13,7 @@ import net.minecraft.tags.WorldPresetTags;
 import net.minecraft.world.level.levelgen.presets.WorldPreset;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uk.isohex.voidmachina.core.Common;
-import uk.isohex.voidmachina.registry.TagRegistry;
+import uk.isohex.voidmachina.registry.WorldPresetRegistry;
 
 public class ModWorldPresetTagsProvider extends TagsProvider<WorldPreset> {
   public ModWorldPresetTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider,
@@ -23,7 +23,6 @@ public class ModWorldPresetTagsProvider extends TagsProvider<WorldPreset> {
 
   protected void addTags(@Nonnull HolderLookup.Provider provider) {
     this.tag(WorldPresetTags.NORMAL)
-        .replace()
-        .add(TagRegistry.WorldPresets.Ids.VOID);
+        .add(WorldPresetRegistry.VOID);
   }
 }

@@ -30,4 +30,12 @@ public class ItemRegistry {
   public static final void register(IEventBus eventBus) {
     ITEMS.register(eventBus);
   }
+
+  public static class MateriaListMassRegister {
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Common.MODID);
+
+    public static void registerAll(String id) {
+      
+    }
+  }
 }

@@ -9,7 +9,7 @@ import uk.isohex.voidmachina.registry.BiomeRegistry;
 
 public class ModBiomeProvider {
   public static void bootstrap(BootstrapContext<Biome> context) {
-    context.register(BiomeRegistry.VOID_BIOME_ID, createVoidBiome());
+    context.register(BiomeRegistry.VOID, createVoidBiome());
   }
 
   private static Biome createVoidBiome() {
